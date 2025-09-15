@@ -218,10 +218,20 @@ namespace RtspVideoCapturing.Recorder
         internal void StopRecording()
         {
             // Отправляем запрос на отмену в CTS
-            if (!_globalCts.IsCancellationRequested)
+            if (_globalCts != null && !_globalCts.IsCancellationRequested)
             {
                 _globalCts.Cancel();
+                _globalCts.Dispose();
             }
+
+            if (_globalCts != null && !_tempCts.IsCancellationRequested)
+            {
+                _tempCts.Cancel();
+                _tempCts.Dispose();
+            }
+
+            _globalCts?.Dispose();
+            _tempCts?.Dispose();
         }
 
         /// <summary>

@@ -41,7 +41,7 @@ namespace RtspVideoCapturing.Recorder.Image
             var ptr1 = (byte*)bd1.Scan0;
             var ptr2 = (byte*)bd2.Scan0;
 
-            // Проходим только по каждому третьему пикселю по X и Y с проверкой границ
+            // Проходим только по каждому step пикселю по X и Y с проверкой границ
             for (var y = 0; y < bmp1.Height; y += step)
             {
                 // Проверяем, не вышли ли за границы по Y
