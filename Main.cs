@@ -57,7 +57,7 @@ namespace RtspVideoCapturing
             // Инициализируем и заполняем параметры класса-рекордера
             _vRecorder = new VideoRecorder(
                 "Cam1",
-                //#error нужно установить корректный rtsp адрес в формате: rtsp://login:password@ip:port/ или rtsp://ip:port/
+#error нужно установить корректный rtsp адрес в формате: rtsp://login:password@ip:port/ или rtsp://ip:port/
                 "rtsp://____________________________",
                 tempDir,
                 recordsDir,
@@ -115,7 +115,7 @@ namespace RtspVideoCapturing
             // Инициализируем список с камерами
             var cams = new List<(string, string)>()
             {
-//#error нужно установить корректные rtsp адреса в формате: rtsp://login:password@ip:port/ или rtsp://ip:port/
+#error нужно установить корректные rtsp адреса в формате: rtsp://login:password@ip:port/ или rtsp://ip:port/
                 ("Cam1", "rtsp://_________________________________"),
                 ("Cam2", "rtsp://_________________________________")
             };
