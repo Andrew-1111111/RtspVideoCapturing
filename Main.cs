@@ -54,6 +54,9 @@ namespace RtspVideoCapturing
             }
             else Directory.CreateDirectory(tempDir);
 
+            // Инициализируем CTS
+            using var globalCTS = new CancellationTokenSource();
+
             // Инициализируем и заполняем параметры класса-рекордера
             _vRecorder = new VideoRecorder(
                 "Cam1",
@@ -62,7 +65,7 @@ namespace RtspVideoCapturing
                 tempDir,
                 recordsDir,
                 VideoRecorder.MotionDifferenceMethod.OpenCV, // OpenCV режим детектора движения
-                new CancellationTokenSource());
+                globalCTS);
 
             try
             {
@@ -112,6 +115,9 @@ namespace RtspVideoCapturing
             }
             else Directory.CreateDirectory(tempDir);
 
+            // Инициализируем CTS
+            using var globalCTS = new CancellationTokenSource();
+
             // Инициализируем список с камерами
             var cams = new List<(string, string)>()
             {
@@ -125,7 +131,7 @@ namespace RtspVideoCapturing
                 cams,
                 tempDir,
                 recordsDir,
-                new CancellationTokenSource());
+                globalCTS);
 
             try
             {

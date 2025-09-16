@@ -11,7 +11,7 @@ namespace RtspVideoCapturing.Recorder
         private readonly string _tempDir;
         private readonly string _recordsDir;
 
-        // Глобальный и временный CTS
+        // Глобальный CTS
         private readonly CancellationTokenSource _globalCts;
 
         /// <summary>

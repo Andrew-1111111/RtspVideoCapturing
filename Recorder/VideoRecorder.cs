@@ -221,13 +221,11 @@ namespace RtspVideoCapturing.Recorder
             if (_globalCts != null && !_globalCts.IsCancellationRequested)
             {
                 _globalCts.Cancel();
-                _globalCts.Dispose();
             }
 
-            if (_globalCts != null && !_tempCts.IsCancellationRequested)
+            if (_tempCts != null && !_tempCts.IsCancellationRequested)
             {
                 _tempCts.Cancel();
-                _tempCts.Dispose();
             }
 
             _globalCts?.Dispose();
