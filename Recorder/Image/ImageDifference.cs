@@ -57,7 +57,7 @@ namespace RtspVideoCapturing.Recorder.Image
                     var index = y * bd1.Stride + x * bytesPerPixel;
 
                     // Дополнительная проверка выхода за границы буфера
-                    if (index + bytesPerPixel > bd1.Stride * bmp1.Height 
+                    if (index + bytesPerPixel > bd1.Stride * bmp1.Height
                         || index + bytesPerPixel > bd2.Stride * bmp2.Height)
                     {
                         continue; // Пропускаем пиксели у границы изображения

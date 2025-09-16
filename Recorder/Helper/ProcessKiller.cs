@@ -18,7 +18,7 @@ namespace RtspVideoCapturing.Helper
                 FileName = "taskkill",
                 // Флаг /F - принудительное завершение процесса
                 // Флаг /IM образ - имя образа процесса, который требуется завершить
-                Arguments = "/F /IM ffmpeg.exe", 
+                Arguments = "/F /IM ffmpeg.exe",
                 UseShellExecute = false,
                 CreateNoWindow = true
             };

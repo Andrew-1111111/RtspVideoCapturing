@@ -1,6 +1,6 @@
 ﻿using FFMpegCore;
 using FFMpegCore.Enums;
-using RtspVideoCapturing.Helper;
+using RtspVideoCapturing.Recorder.Helper;
 using RtspVideoCapturing.Recorder.Image;
 using RtspVideoCapturing.Recorder.OpenCV;
 using System.Diagnostics;
@@ -16,7 +16,7 @@ namespace RtspVideoCapturing.Recorder
         private static readonly string _ffmpegPath = AppDomain.CurrentDomain.BaseDirectory + @"ffmpeg\bin\";
 
         // Используйте только ".png" (при смене расширения на ".bmp" библиотека ffmpeg ведет себя некорректно, не освобождает файл с изображением)
-        private const string IMG_EXTENSION = ".png"; 
+        private const string IMG_EXTENSION = ".png";
 
         // Расширение MP4
         private const string VIDEO_EXTENSION = ".mp4";
@@ -358,7 +358,7 @@ namespace RtspVideoCapturing.Recorder
                     var linkedCTS = CancellationTokenSource.CreateLinkedTokenSource(_globalCts.Token, _tempCts.Token);
 
                     // Запускаем запись видео в файл
-                    await RecordSegmentAsync(_rtspUrl, tempVideoPath, linkedCTS.Token); 
+                    await RecordSegmentAsync(_rtspUrl, tempVideoPath, linkedCTS.Token);
                 }
                 catch (OperationCanceledException)
                 {
@@ -522,7 +522,9 @@ namespace RtspVideoCapturing.Recorder
 
             if (segmentTimePeriod != null && segmentTimePeriod?.TotalMilliseconds > 0)
             {
-                await AsyncExt.TimeoutAsync(workTask, (int)segmentTimePeriod?.TotalMilliseconds! + 5000); // Добавляем +5 секунд к таймауту асинхронной операции
+                await AsyncExt.TimeoutAsync(
+                    workTask,
+                    TimeSpan.FromMilliseconds((int)segmentTimePeriod?.TotalMilliseconds! + 5000)); // Добавляем +5 секунд к таймауту асинхронной операции
             }
             else await workTask;
         }
@@ -536,7 +538,7 @@ namespace RtspVideoCapturing.Recorder
         /// <param name="operationTimeoutS">Таймаут асинхронной операции</param>
         /// <returns>True - файл успешно сохранен, False - не удалось сохранить файл</returns>
         /// <exception cref="ArgumentException">Аргумент operationTimeoutS должен быть больше нуля</exception>
-        private async Task<bool> SaveImageAsync(string tempVideoPath, string tempDir, string fileNameWithoutExt, 
+        private async Task<bool> SaveImageAsync(string tempVideoPath, string tempDir, string fileNameWithoutExt,
             int operationTimeoutS = 7)
         {
             if (operationTimeoutS <= 0)
@@ -549,7 +551,7 @@ namespace RtspVideoCapturing.Recorder
 
                 // Получаем и сохраняем изображение из памяти
                 return await AsyncExt.TimeoutAsync(
-                    FFMpeg.SnapshotAsync(tempVideoPath, snapshotPath, new Size(1920, 1080)), 
+                    FFMpeg.SnapshotAsync(tempVideoPath, snapshotPath, new Size(1920, 1080)),
                     TimeSpan.FromSeconds(operationTimeoutS));
             }
             catch (Exception ex)
@@ -651,7 +653,7 @@ namespace RtspVideoCapturing.Recorder
                     Debug.WriteLine($@"{_camName}. Pixel motion detector: "
                         + (hasMotion ? "motion" : "no motion") + $" - {threshold} | {pixel_motion_threshold}");
                 }
-               
+
                 // Заменяем эталонное изображение на новое
                 if (hasMotion)
                 {

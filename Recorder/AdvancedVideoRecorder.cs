@@ -60,10 +60,10 @@ namespace RtspVideoCapturing.Recorder
                     {
                         // Инициализируем и заполняем параметры класса-рекордера
                         var vRecorder = new VideoRecorder(
-                            cam.Item1, 
-                            cam.Item2, 
-                            _tempDir, 
-                            _recordsDir, 
+                            cam.Item1,
+                            cam.Item2,
+                            _tempDir,
+                            _recordsDir,
                             VideoRecorder.MotionDifferenceMethod.OpenCV, // OpenCV режим детектора движения
                             _globalCts);
 
