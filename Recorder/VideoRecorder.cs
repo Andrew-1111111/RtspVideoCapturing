@@ -244,20 +244,10 @@ namespace RtspVideoCapturing.Recorder
             if (nDelaySec <= 0)
                 throw new ArgumentException("The nDelaySec must be > 0");
 
-            var startTimeStamp = DateTime.Now;  // Получаем текущую дату и время
-            var retryCount = 0;                 // Счетчик текущей итерации повтора
-            var maxRetryCount = 3;              // Счетчик максимально возможных повторов
-            int tempDelayS;                     // Счетчик временной задержки итерации (nDelaySec / maxRetryCount)
-
-            // Получаем временный таймаут для каждой итерации цикла
-            if (nDelaySec % maxRetryCount == 0)
-            {
-                tempDelayS = nDelaySec / maxRetryCount;
-            }
-            else
-            {
-                tempDelayS = (int)Math.Ceiling((double)nDelaySec / maxRetryCount); // Округляем в большую сторону
-            }
+            var startTimeStamp = DateTime.Now;                            // Получаем текущую дату и время
+            var retryCount = 0;                                           // Счетчик  текущей итерации повтора
+            var maxRetryCount = 3;                                        // Счетчик максимально возможных повторов
+            var tempDelayS = NumRounding.Round(nDelaySec, maxRetryCount); // Получаем временный таймаут для каждой итерации цикла
 
             while (!_globalCts.IsCancellationRequested)
             {
@@ -381,19 +371,9 @@ namespace RtspVideoCapturing.Recorder
         /// <returns>Асинхронная задача</returns>
         private async Task NetworkMonitoringAsync(int waitMaxS = 60)
         {
-            var retryCount = 0;                 // Счетчик  текущей итерации повтора
-            var maxRetryCount = 3;              // Счетчик максимально возможных повторов
-            int tempDelayS;                     // Счетчик временной задержки итерации (waitMaxS / maxRetryCount)
-
-            // Получаем временный таймаут для каждой итерации цикла
-            if (waitMaxS % maxRetryCount == 0)
-            {
-                tempDelayS = waitMaxS / maxRetryCount;
-            }
-            else
-            {
-                tempDelayS = (int)Math.Ceiling((double)waitMaxS / maxRetryCount); // Округляем в большую сторону
-            }
+            var retryCount = 0;                                          // Счетчик  текущей итерации повтора
+            var maxRetryCount = 3;                                       // Счетчик максимально возможных повторов
+            var tempDelayS = NumRounding.Round(waitMaxS, maxRetryCount); // Получаем временный таймаут для каждой итерации цикла
 
             while (!_globalCts.IsCancellationRequested)
             {

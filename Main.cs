@@ -1,5 +1,5 @@
-﻿using RtspVideoCapturing.Helper;
-using RtspVideoCapturing.Recorder;
+﻿using RtspVideoCapturing.Recorder;
+using RtspVideoCapturing.Recorder.Helper;
 
 namespace RtspVideoCapturing
 {

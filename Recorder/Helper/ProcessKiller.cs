@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace RtspVideoCapturing.Helper
+namespace RtspVideoCapturing.Recorder.Helper
 {
     /// <summary>
     /// Класс для завершения процессов

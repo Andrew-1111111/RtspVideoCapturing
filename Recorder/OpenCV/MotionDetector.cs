@@ -1,6 +1,7 @@
 ﻿using OpenCvSharp;
 using System.Diagnostics;
 using System.Drawing.Imaging;
+using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
 using Size = OpenCvSharp.Size;
 
@@ -214,6 +215,7 @@ namespace RtspVideoCapturing.Recorder.OpenCV
             return motionDetected;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Mat BitmapToMat(Bitmap bitmap)
         {
             // Конвертируем в Format24bppRgb (если нужно)

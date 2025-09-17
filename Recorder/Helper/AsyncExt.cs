@@ -1,5 +1,8 @@
 ﻿namespace RtspVideoCapturing.Recorder.Helper
 {
+    /// <summary>
+    /// Класс, реализующий асинхронный таймаут
+    /// </summary>
     internal class AsyncExt
     {
         internal static async Task TimeoutAsync(Task? task, TimeSpan timeout)
